@@ -11,10 +11,8 @@ import org.springframework.security.oauth2.client.web.DefaultReactiveOAuth2Autho
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository
 import org.springframework.web.reactive.function.client.*
-import java.util.function.Consumer
 import reactor.core.publisher.Mono
-
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction
+import java.util.function.Consumer
 
 
 @Configuration
@@ -27,8 +25,9 @@ class WebClientConfig(
     }
 
     @Bean
-    fun webClient(authorizedClientManager: ReactiveOAuth2AuthorizedClientManager?): WebClient? {
-        val oauth = ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
+    fun webClient(clientRegistrationRepository: ReactiveClientRegistrationRepository?,
+                  authorizedClientRepository: ServerOAuth2AuthorizedClientRepository?): WebClient? {
+        val oauth = ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository, authorizedClientRepository)
         return WebClient.builder()
             .baseUrl(DISCORD_API_URL)
             .filter(oauth)
@@ -36,6 +35,7 @@ class WebClientConfig(
             .filter(logResponseStatus())
             .build()
     }
+/*
 
     @Bean
     fun authorizedClientManager(
@@ -51,6 +51,7 @@ class WebClientConfig(
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider)
         return authorizedClientManager
     }
+*/
 
 
     private fun logRequest(): ExchangeFilterFunction {
@@ -60,11 +61,7 @@ class WebClientConfig(
                 .forEach { name: String?, values: List<String?> ->
                     values.forEach(
                         Consumer { value: String? ->
-                            logger.info(
-                                "{}={}",
-                                name,
-                                value
-                            )
+                            logger.info("{}={}", name, value)
                         })
                 }
             next.exchange(clientRequest)
