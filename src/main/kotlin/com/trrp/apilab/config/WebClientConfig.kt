@@ -21,21 +21,23 @@ class WebClientConfig(
 ) {
 
     companion object {
-        private const val DISCORD_API_URL = "https://discord.com/api"
+        private const val GITHUB_API_URL = "https://api.github.com"
     }
 
     @Bean
-    fun webClient(clientRegistrationRepository: ReactiveClientRegistrationRepository?,
-                  authorizedClientRepository: ServerOAuth2AuthorizedClientRepository?): WebClient? {
-        val oauth = ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository, authorizedClientRepository)
+    fun webClient(
+        authorizedClientManager: ReactiveOAuth2AuthorizedClientManager
+    ): WebClient? {
+        val oauth =
+            ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
         return WebClient.builder()
-            .baseUrl(DISCORD_API_URL)
+            .baseUrl(GITHUB_API_URL)
             .filter(oauth)
             .filter(logRequest())
             .filter(logResponseStatus())
             .build()
     }
-/*
+
 
     @Bean
     fun authorizedClientManager(
@@ -51,7 +53,6 @@ class WebClientConfig(
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider)
         return authorizedClientManager
     }
-*/
 
 
     private fun logRequest(): ExchangeFilterFunction {

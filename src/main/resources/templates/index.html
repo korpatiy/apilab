@@ -15,8 +15,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h3 th:text="'GitHub repositories of ' + ${username}"></h3>
-            <p>Only the first 100 repositories are shown</p>
+            <h3 th:text="'GitHub repositories of ' + ${login}"></h3>
             <ol>
                 <li th:each="repository : ${repositories}" th:text="${repository}"></li>
             </ol>
