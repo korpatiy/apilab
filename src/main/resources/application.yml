@@ -14,8 +14,11 @@ spring:
             authorizationUri: https://github.com/login/oauth/authorize
             tokenUri: https://github.com/login/oauth/access_token
             userInfoUri: https://api.github.com/user
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
+  redis:
+    port: 6379
+    host: localhost
 
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true

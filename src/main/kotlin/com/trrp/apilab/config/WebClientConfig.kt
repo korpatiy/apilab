@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.client.registration.ReactiveClientReg
 import org.springframework.security.oauth2.client.web.DefaultReactiveOAuth2AuthorizedClientManager
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository
+import org.springframework.session.data.redis.config.annotation.web.server.EnableRedisWebSession
 import org.springframework.web.reactive.function.client.*
 import reactor.core.publisher.Mono
 import java.net.http.HttpHeaders

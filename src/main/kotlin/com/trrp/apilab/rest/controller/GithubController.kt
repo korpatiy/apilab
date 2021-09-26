@@ -79,7 +79,7 @@ class GithubController(
     ): String {
         model.addAttribute(
             "repository",
-            githubService.editRepo(authorizedClient, oauth2User.attributes["login"].toString(), repoName ,repository)
+            githubService.editRepo(authorizedClient, oauth2User.attributes["login"].toString(), repoName, repository)
         )
         return "repo-view"
     }
