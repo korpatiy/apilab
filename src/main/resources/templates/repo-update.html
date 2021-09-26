@@ -12,10 +12,10 @@
 </head>
 <body>
 <div class="container my-5">
-    <h2 class="mb-5">New Repository</h2>
+    <h2 class="mb-5">Update Repository</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/post}" th:object="${repository}" method="post">
+            <form action="#" th:action="@{/patch/{name}(name=${repository.name})}" th:object="${repository}" method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Name</label>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Create Repository">
+                        <input type="submit" class="btn btn-primary" value="Update Repository">
                     </div>
                 </div>
             </form>

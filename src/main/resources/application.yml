@@ -7,10 +7,15 @@ spring:
             clientId: 62572943953065d32df6
             clientSecret: 02f381ef7a65c54711944fd667fbdacf35172926
             redirectUri: "{baseUrl}/login/oauth2/code/github"
-            scope: user, repo
+            scope: user, repo, delete_repo
             authorizationGrantType: authorization_code
         provider:
           github:
             authorizationUri: https://github.com/login/oauth/authorize
             tokenUri: https://github.com/login/oauth/access_token
             userInfoUri: https://api.github.com/user
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

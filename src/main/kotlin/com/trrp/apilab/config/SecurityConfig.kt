@@ -19,9 +19,5 @@ class SecurityConfig {
             .oauth2Login(Customizer.withDefaults())
             .csrf().disable()
             .build()
-
-        //.authorizeExchange(exchanges -> exchanges
-        //                .anyExchange().authenticated()
-        //            )
     }
 }

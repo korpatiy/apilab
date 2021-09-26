@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Github Client Lab</title>
+    <title>TRRP Lab1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -21,23 +21,24 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <!--  <th>Fullname</th>-->
                         <th>Description</th>
                         <th>Private</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Look</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="repository : ${repositories}">
                         <td th:text="${repository.name}"></td>
-                        <!-- <td th:text="${repository.fullName}"></td>-->
                         <td th:text="${repository.description}"></td>
                         <td th:text="${repository.isPrivate}"></td>
-                        <!-- <td><a th:href="@{/edit/{id}(id=${music.id})}" class="btn btn-primary"><i
-                                 class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                         <td><a th:href="@{/delete/{id}(id=${music.id})}" class="btn btn-primary"><i
-                                 class="fa fa-trash" aria-hidden="true"></i></a></td>-->
+                        <td><a th:href="@{/update/{name}(name=${repository.name})}" class="btn btn-primary"><i
+                                class="fa fa-cogs" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/delete/{name}(name=${repository.name})}" class="btn btn-primary"><i
+                                class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        <td><a th:href="@{/get/{name}/(name=${repository.name})}" class="btn btn-primary"><i
+                                class="fa fa-search" aria-hidden="true"></i></a></td>
                     </tr>
                     </tbody>
                 </table>

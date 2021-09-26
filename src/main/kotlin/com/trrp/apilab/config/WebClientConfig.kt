@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.web.reactive.function.client.S
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository
 import org.springframework.web.reactive.function.client.*
 import reactor.core.publisher.Mono
+import java.net.http.HttpHeaders
 import java.util.function.Consumer
 
 
@@ -22,6 +23,7 @@ class WebClientConfig(
 
     companion object {
         private const val GITHUB_API_URL = "https://api.github.com"
+        private const val GITHUB_V3_MIME_TYPE = "application/vnd.github.v3+json"
     }
 
     @Bean
@@ -32,6 +34,7 @@ class WebClientConfig(
             ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
         return WebClient.builder()
             .baseUrl(GITHUB_API_URL)
+            //.defaultHeader(HttpHeaders.CONTENT_TYPE, GITHUB_V3_MIME_TYPE)
             .filter(oauth)
             .filter(logRequest())
             .filter(logResponseStatus())
